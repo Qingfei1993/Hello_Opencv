@@ -67,6 +67,16 @@ class opencv():
         pass
 
     def face_detect(self):
+        face_detect_img = self.img.copy()
+        imgGray = cv2.cvtColor(self.img, cv2.COLOR_BGR2GRAY)
+        Cascade_detect = cv2.CascadeClassifier('mode/haarcascade_frontalface_default.xml')
+        faces = Cascade_detect.detectMultiScale(imgGray, 1.1, 4)
+        for face in faces:
+            x, y, w, h = face
+            cv2.rectangle(face_detect_img, (x, y), (x+w, y+h), (0, 255, 0), 3)
+        cv2.imshow('face_detect', stackImages(1, ([self.img, face_detect_img])))
+        cv2.waitKey(0)
+        cv2.destroyWindow('face_detect')
         pass
 
     def polygon_detect(self):
