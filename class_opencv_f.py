@@ -119,12 +119,12 @@ class opencv():
                 vertices_num = len(approx)
                 x, y, w, h = cv2.boundingRect(approx)
 
-                if vertices_num == 3: objecttype = ''
+                if vertices_num == 3: objecttype = 'triangle'
                 elif vertices_num == 4:
                     rate = w/h
-                    if (rate > 0.95) and (rate < 1.05): objecttype = ''
-                    else: objecttype = ''
-                else: objecttype = ''
+                    if (rate > 0.95) and (rate < 1.05): objecttype = 'square'
+                    else: objecttype = 'rectangle'
+                else: objecttype = 'none'
                 cv2.rectangle(img_polygen_detect, (x, y), (x+w, y+h), (0, 255, 0), 3)
                 cv2.putText(img_polygen_detect, objecttype, (x+w+10, y+h+10), cv2.FONT_HERSHEY_COMPLEX, 0.07, (0, 0, 0))
         return img_polygen_detect
